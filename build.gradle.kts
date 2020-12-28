@@ -10,7 +10,7 @@ plugins {
 	id("se.patrikerdes.use-latest-versions") version "0.2.15"
 }
 
-group = "xerus.tournament"
+group = "xerus.tournament.lobster"
 version = "1.0"
 
 application {
@@ -34,7 +34,6 @@ dependencies {
 
 tasks {
 	shadowJar {
-		archiveBaseName.set("tournament")
 		archiveClassifier.set(null as String?)
 	}
  
