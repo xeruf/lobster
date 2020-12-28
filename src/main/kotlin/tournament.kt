@@ -3,6 +3,7 @@ import java.io.File
 import java.io.FileWriter
 import java.util.concurrent.atomic.AtomicInteger
 import kotlin.random.Random
+import kotlin.system.exitProcess
 
 val root = File("src/main/resources").takeIf { it.exists() }
     ?: File(".")
@@ -17,13 +18,19 @@ fun writeGame(text: String) {
 }
 
 fun main() {
-    val players = getFile("teams.txt").readLines().filter { it.isNotBlank() }.let {
+    val teamsFile = getFile("teams.txt")
+    val teams = teamsFile.readLines().filter { it.isNotBlank() }.let {
         if(it.size % 2 == 1) {
             it + "--"
         } else {
             it
         }
     }
+    if(teams.size < 2) {
+        println("Please create $teamsFile with at least 2 teams.")
+        exitProcess(1)
+    }
+    
     var round = 1
     val games = try {
         val lines = gamesFile.readLines()
@@ -33,16 +40,16 @@ fun main() {
         emptyList()
     }
     val matchups = HashMap<String, MutableMap<String, AtomicInteger>>()
-    players.forEach {
+    teams.forEach {
         val m = matchups.getOrPut(it) { HashMap() }
-        players.forEach { partner ->
+        teams.forEach { partner ->
             m[partner] = AtomicInteger(64)
         }
     }
     games.forEach {
         val c = it.split(" vs ")
         assert(c.size == 2) { "Invalid matchup: $it" }
-        if(!players.contains(c[0]) || !players.contains(c[1])) {
+        if(!teams.contains(c[0]) || !teams.contains(c[1])) {
             println("Ignoring previous game $it as it contains inactive players")
         } else {
             matchups[c[1]]!![c[0]]!!.getAndUpdate { it / 5 }
@@ -57,7 +64,7 @@ fun main() {
     val startTime = System.currentTimeMillis()
     experiment@ do {
         var collisions = 0
-        val openPlayers = players.toMutableList()
+        val openPlayers = teams.toMutableList()
         val output = StringBuffer()
         while(openPlayers.size > 1) {
             val p = openPlayers.removeAt(Random.nextInt(openPlayers.size - 1))
