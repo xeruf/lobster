@@ -42,8 +42,8 @@ fun main() {
     val matchups = HashMap<String, MutableMap<String, AtomicInteger>>()
     teams.forEach {
         val m = matchups.getOrPut(it) { HashMap() }
-        teams.forEach { partner ->
-            m[partner] = AtomicInteger(64)
+        teams.forEach { opponent ->
+            m[opponent] = AtomicInteger(1_073_741_824)
         }
     }
     games.forEach {
@@ -52,8 +52,8 @@ fun main() {
         if(!teams.contains(c[0]) || !teams.contains(c[1])) {
             println("Ignoring previous game $it as it contains inactive players")
         } else {
-            matchups[c[1]]!![c[0]]!!.getAndUpdate { it / 5 }
-            matchups[c[0]]!![c[1]]!!.getAndUpdate { it / 5 }
+            matchups[c[1]]!![c[0]]!!.getAndUpdate { (it / 4).coerceAtLeast(1) }
+            matchups[c[0]]!![c[1]]!!.getAndUpdate { (it / 4).coerceAtLeast(1) }
         }
     }
     
