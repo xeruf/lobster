@@ -4,7 +4,7 @@ A CLI program to generate tournament matchups.
 ## Getting started
 
 - install Java
-- download the [release](/releases)
+- download the [release](/xerus2000/lobster/releases/latest)
 - create a `teams.txt` next to the jar with each team in one line
 - launch from the terminal with `java -jar tournament.jar`
 
