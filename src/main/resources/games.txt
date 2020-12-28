@@ -1,0 +1,36 @@
+# Round 1
+Tasazu vs Shinigammel
+Chickenforest vs --
+
+# Round 2
+Tasazu vs --
+Shinigammel vs Chickenforest
+
+# Round 3
+Shinigammel vs --
+Tasazu vs Chickenforest
+
+# Round 4
+Shinigammel vs --
+Tasazu vs Chickenforest
+
+# Round 5
+Shinigammel vs Tasazu
+Chickenforest vs --
+
+# Round 6
+Shinigammel vs Chickenforest
+Tasazu vs --
+
+# Round 7
+Shinigammel vs --
+Tasazu vs Chickenforest
+
+# Round 8
+Chickenforest vs --
+Shinigammel vs Tasazu
+
+# Round 9
+Tasazu vs --
+Shinigammel vs Chickenforest
+
